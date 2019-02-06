@@ -16,13 +16,4 @@ void GameModule::OnDestroy()
 	std::cout << "GameModule::OnDestroy called" << std::endl;
 };
 
-MODULE_BLOCK
-{
-	MODULE_ENTRYPOINT()
-	{
-		GameModule* game = new GameModule();
-		game->Initialize();
-
-		MODULE_RETURN(game);
-	};
-}
+MODULE_INITIALIZE(GameModule);

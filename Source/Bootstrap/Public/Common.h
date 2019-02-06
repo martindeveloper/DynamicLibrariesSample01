@@ -15,7 +15,17 @@
 #define MODULE_BLOCK extern "C"
 #define MODULE_ENTRYPOINT_NAME "ModuleEntrypoint"
 #define MODULE_ENTRYPOINT PUBLIC_FUNCTION_API IModule* ModuleEntrypoint
-#define MODULE_RETURN(InModule) return dynamic_cast<IModule*>(InModule);
+#define MODULE_RETURN(InModule) return dynamic_cast<IModule*>(InModule)
 #define MODULE_EXTENSION ".dll"
+#define MODULE_INITIALIZE(ModuleName) \
+MODULE_BLOCK \
+{ \
+	MODULE_ENTRYPOINT() \
+	{ \
+	##ModuleName * moduleImplementation = new (##ModuleName)(); \
+	moduleImplementation->Initialize(); \
+	MODULE_RETURN(moduleImplementation); \
+	}; \
+} \
 
 #include <iostream>
