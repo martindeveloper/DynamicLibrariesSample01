@@ -1,4 +1,5 @@
 #include "Module.h"
+#include "Public/Log.h"
 
 void EngineModule::Initialize()
 {
@@ -7,7 +8,7 @@ void EngineModule::Initialize()
 
 void EngineModule::OnStart()
 {
-	std::cout << "ComponentsModule::OnStart called" << std::endl;
+	std::cout << "EngineModule::OnStart called" << std::endl;
 
 	LockIsEngineMainLoopRunning = new std::mutex();
 
@@ -88,4 +89,9 @@ MODULE_BLOCK
 
 		MODULE_RETURN(engine);
 	};
+
+	PUBLIC_FUNCTION_API Log* CreateLogInstanceWithName(const char* name)
+	{
+		return new Log(name);
+	}
 }

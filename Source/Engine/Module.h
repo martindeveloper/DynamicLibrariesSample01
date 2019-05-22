@@ -1,4 +1,11 @@
 #pragma once
+
+#ifdef ENGINE_EXPORTS
+#define ENGINE_API __declspec(dllexport)
+#else
+#define ENGINE_API __declspec(dllimport)
+#endif
+
 #include "Public/ComponentsRegistry.h"
 #include "../Bootstrap/Public/IModule.h"
 
@@ -10,7 +17,7 @@
 #include <thread>
 #include <chrono>
 
-class PUBLIC_API EngineModule : public IModule
+class ENGINE_API EngineModule : public IModule
 {
 private:
 	ComponentsRegistry* Registry;
