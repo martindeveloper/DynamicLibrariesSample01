@@ -4,6 +4,7 @@
 
 void GameModule::Initialize()
 {
+	// You should store this DLL handle and use `FreeLibrary` when you are done
 	HINSTANCE engineModuleHandle = LoadLibrary("Engine.dll");
 
 	if (engineModuleHandle != nullptr)
