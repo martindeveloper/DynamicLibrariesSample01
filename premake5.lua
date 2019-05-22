@@ -83,4 +83,6 @@ project "Game"
 
    defines { "GAME_EXPORTS=1" }
 
+   -- Uncomment `links` statement if you want to use Load-Time Linking
+   -- links { "Engine" }
    dependson { "Engine" }
