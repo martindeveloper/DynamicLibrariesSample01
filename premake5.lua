@@ -28,11 +28,11 @@ project "Bootstrap"
    entrypoint "main"
    flags { }
 
-   toolset "v141" -- VS2017
+   toolset "v142" -- VS2017
 
    files { "Source/Bootstrap/**.h", "Source/Bootstrap/**.cpp" }
 
-   targetdir "Binaries/%{cfg.buildcfg}"
+   targetdir "Binaries/%{cfg.platform}/%{cfg.buildcfg}"
    objdir "Intermediate/%{cfg.platform}/%{cfg.buildcfg}"
    debugdir "Binaries/%{cfg.platform}/%{cfg.buildcfg}"
 
@@ -43,7 +43,7 @@ project "Engine"
    language "C++"
    characterset "ASCII"
 
-   toolset "v141"
+   toolset "v142"
 
    targetdir "Binaries/%{cfg.platform}/%{cfg.buildcfg}"
    objdir "Intermediate/%{cfg.platform}/%{cfg.buildcfg}"
@@ -51,12 +51,14 @@ project "Engine"
 
    files { "Source/Engine/**.h", "Source/Engine/**.cpp" }
 
+   defines { "ENGINE_EXPORTS=1" }
+
 project "Components"
    kind "SharedLib"
    language "C++"
    characterset "ASCII"
 
-   toolset "v141"
+   toolset "v142"
 
    targetdir "Binaries/%{cfg.platform}/%{cfg.buildcfg}"
    objdir "Intermediate/%{cfg.platform}/%{cfg.buildcfg}"
@@ -64,15 +66,21 @@ project "Components"
 
    files { "Source/Components/**.h", "Source/Components/**.cpp" }
 
+   defines { "COMPONENTS_EXPORTS=1" }
+
 project "Game"
    kind "SharedLib"
    language "C++"
    characterset "ASCII"
    
-   toolset "v141"
+   toolset "v142"
 
    targetdir "Binaries/%{cfg.platform}/%{cfg.buildcfg}"
    objdir "Intermediate/%{cfg.platform}/%{cfg.buildcfg}"
    debugdir "Binaries/%{cfg.platform}/%{cfg.buildcfg}"
 
    files { "Source/Game/**.h", "Source/Game/**.cpp" }
+
+   defines { "GAME_EXPORTS=1" }
+
+   dependson { "Engine" }
